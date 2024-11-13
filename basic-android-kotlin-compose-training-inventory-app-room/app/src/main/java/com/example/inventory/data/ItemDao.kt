@@ -24,19 +24,35 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * @Dao digunakan untuk menandai sebuah interface atau kelas sebagai Data Access Object
+ */
 @Dao
 interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: Item)
+    /**
+     * @Insert digunakan untuk menandai metode yang akan digunakan untuk menambahkan data ke dalam tabel database.
+     */
 
     @Update
     suspend fun update(item: Item)
+    /**
+     * @Update digunakan untuk menandai metode yang akan digunakan untuk memperbarui data dalam tabel database.
+     */
 
     @Delete
     suspend fun delete(item: Item)
+    /**
+     * @Delete digunakan untuk menandai metode yang akan digunakan untuk menghapus data dari tabel database.
+     */
 
     @Query("SELECT * from items WHERE id = :id")
     fun getItem(id: Int): Flow<Item>
+    /**
+     * @Query digunakan untuk menandai metode yang akan menjalankan query SQL yang digunakan untuk mengambil data dari tabel database.
+     */
+
 
     @Query("SELECT * from items ORDER BY name ASC")
     fun getAllItems(): Flow<List<Item>>

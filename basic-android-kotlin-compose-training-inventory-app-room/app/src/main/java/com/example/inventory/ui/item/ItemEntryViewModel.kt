@@ -44,12 +44,20 @@ class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewMod
             ItemUiState(itemDetails = itemDetails, isEntryValid = validateInput(itemDetails))
     }
 
+
+    /**
+     * Fungsi ini digunakan untuk menyimpan item ke dalam database Room.
+     */
     suspend fun saveItem() {
         if (validateInput()) {
             itemsRepository.insertItem(itemUiState.itemDetails.toItem())
         }
     }
 
+    /**
+     * Fungsi ini digunakan untuk memverifikasi input pengguna agar tidak kosong
+     * sebelum menambahkan atau memperbarui entitas dalam database.
+     */
     private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
         return with(uiState) {
             name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
@@ -76,6 +84,8 @@ data class ItemDetails(
  * Extension function to convert [ItemDetails] to [Item]. If the value of [ItemDetails.price] is
  * not a valid [Double], then the price will be set to 0.0. Similarly if the value of
  * [ItemDetails.quantity] is not a valid [Int], then the quantity will be set to 0
+ *
+ * Fungsi ini mengonversi objek ItemDetails menjadi Item.
  */
 fun ItemDetails.toItem(): Item = Item(
     id = id,
@@ -90,6 +100,8 @@ fun Item.formatedPrice(): String {
 
 /**
  * Extension function to convert [Item] to [ItemUiState]
+ *
+ * Fungsi ini mengonversi entitas Item menjadi objek ItemUiState.
  */
 fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
     itemDetails = this.toItemDetails(),
@@ -98,6 +110,8 @@ fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState
 
 /**
  * Extension function to convert [Item] to [ItemDetails]
+ *
+ * Fungsi ini mengonversi entitas Item menjadi objek ItemDetails.
  */
 fun Item.toItemDetails(): ItemDetails = ItemDetails(
     id = id,

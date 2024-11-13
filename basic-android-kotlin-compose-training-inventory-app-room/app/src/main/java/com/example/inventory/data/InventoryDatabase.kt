@@ -21,12 +21,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+
+/**
+ * @Database digunakan untuk menandai kelas sebagai database Room.
+ */
 @Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class InventoryDatabase : RoomDatabase() {
 
     abstract fun itemDao(): ItemDao
 
     companion object {
+        /**
+         * @Volatile digunakan untuk menandai variabel yang nilainya disimpan atau dibaca langsung dari memori utama.
+         */
         @Volatile
         private var Instance: InventoryDatabase? = null
 

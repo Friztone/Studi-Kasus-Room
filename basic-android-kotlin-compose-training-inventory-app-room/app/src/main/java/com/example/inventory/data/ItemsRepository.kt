@@ -24,25 +24,30 @@ import kotlinx.coroutines.flow.Flow
 interface ItemsRepository {
     /**
      * Retrieve all the items from the the given data source.
+     * Fungsi getAllItemsStream yang mengembalikan aliran (Flow) dari semua daftar Item.
      */
     fun getAllItemsStream(): Flow<List<Item>>
 
     /**
      * Retrieve an item from the given data source that matches with the [id].
+     * Fungsi getItemStream yang mengembalikan aliran (Flow) dari Item yang sesuai dengan id yang diberikan.
      */
     fun getItemStream(id: Int): Flow<Item?>
 
     /**
+     * Fungsi insertItem yang bersifat suspend (asinkron) untuk menambahkan Item ke dalam data.
      * Insert item in the data source
      */
     suspend fun insertItem(item: Item)
 
     /**
+     * Fungsi deleteItem yang bersifat suspend untuk menghapus Item dari data.
      * Delete item from the data source
      */
     suspend fun deleteItem(item: Item)
 
     /**
+     * Fungsi updateItem yang bersifat suspend untuk memperbarui Item di dalam data
      * Update item in the data source
      */
     suspend fun updateItem(item: Item)

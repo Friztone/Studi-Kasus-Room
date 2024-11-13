@@ -95,6 +95,10 @@ fun ItemEntryScreen(
 }
 
 @Composable
+
+        /**
+         * Fungsi ini menampilkan formulir input untuk item dan tombol Simpan.
+         */
 fun ItemEntryBody(
     itemUiState: ItemUiState,
     onItemValueChange: (ItemDetails) -> Unit,
